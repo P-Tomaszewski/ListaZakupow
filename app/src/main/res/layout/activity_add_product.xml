@@ -6,13 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".activity.AddPaymentActivity">
 
+    <CheckBox
+        android:id="@+id/product_done_edit"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:isScrollContainer="false"
+        android:linksClickable="false"
+        android:text="@string/kupione"
+        app:layout_constraintEnd_toEndOf="@+id/product_price"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/product_price" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Nazwa"
-        app:layout_constraintBaseline_toBaselineOf="@+id/payment_place"
+        app:layout_constraintBaseline_toBaselineOf="@+id/product_name"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -21,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Ilość"
-        app:layout_constraintBaseline_toBaselineOf="@+id/payment_category"
+        app:layout_constraintBaseline_toBaselineOf="@+id/product_amount"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -30,11 +42,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Cena"
-        app:layout_constraintBaseline_toBaselineOf="@+id/payment_amount"
+        app:layout_constraintBaseline_toBaselineOf="@+id/product_price"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/payment_amount"
+        android:id="@+id/product_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -43,10 +55,11 @@
         android:inputType="number|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/payment_category" />
+        app:layout_constraintTop_toBottomOf="@+id/product_amount"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/payment_place"
+        android:id="@+id/product_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -54,12 +67,13 @@
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="textPersonName|textAutoComplete"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/payment_category"
+        android:id="@+id/product_amount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -69,7 +83,7 @@
         android:inputType="textPersonName|textAutoComplete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/payment_place" />
+        app:layout_constraintTop_toBottomOf="@+id/product_name" />
 
     <Button
         android:id="@+id/saveButton"

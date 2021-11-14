@@ -16,7 +16,7 @@ interface ProductDao {
     fun deleteProductById(id: Long)
 
     @Query("Select * FROM product WHERE id = :id")
-    fun getPaymentById(id: Long): ProductDto
+    fun getProductById(id: Long): ProductDto
 
     @Update
     fun updateProduct(payment: ProductDto)
