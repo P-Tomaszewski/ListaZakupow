@@ -1,6 +1,8 @@
 package com.example.listazakupow.activity
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Intent
 import android.os.Bundle
 import android.widget.CheckBox
 import android.widget.EditText
@@ -47,9 +49,15 @@ class AddProductActivity : AppCompatActivity() {
     }
 
     private fun setupSave(edit: Boolean, id: Long) = view.saveButton.setOnClickListener {
+        val broadcastIntent = Intent()
+        broadcastIntent.component = ComponentName(
+            "com.example.receiver3",
+            "com.example.receiver3.MyReceiver"
+        )
 
         if (!edit) { //new
-            val paymentDto = ProductDto(
+            var productId = 0L
+            val productDto = ProductDto(
                 0,
                 name = view.productName.text.toString(),
                 amount = toDoubleNum(view.productAmount.text.toString()),
@@ -57,10 +65,21 @@ class AddProductActivity : AppCompatActivity() {
                 done = view.productDoneEdit.isChecked
             )
             pool.submit {
-                db.products.insert(paymentDto)
+               productId = db.products.insert(productDto)
                 setResult(Activity.RESULT_OK)
                 finish()
+                broadcastIntent.putExtra(
+                    "productId",
+                    productId
+                )
+                broadcastIntent.putExtra(
+                    "name",
+                    productDto.name
+                )
+                sendBroadcast(broadcastIntent)
             }
+
+
         } else { //update
             val productDto = ProductDto(
                 id,
