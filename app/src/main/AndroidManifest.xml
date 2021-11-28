@@ -18,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddProductActivity"></activity>
-        <activity android:name=".activity.OptionsActivity"></activity>
+        <activity android:name=".activity.AddProductActivity"
+            android:exported="true">></activity>
+        <activity android:name=".activity.OptionsActivity"
+            ></activity>
     </application>
 
 </manifest>
