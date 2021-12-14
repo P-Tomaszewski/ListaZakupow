@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "741351718070",
+    "project_id": "listazakupow-e82b8",
+    "storage_bucket": "listazakupow-e82b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741351718070:android:21ffdf9540d2c7118e3a17",
+        "android_client_info": {
+          "package_name": "com.example.listazakupow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741351718070-5jv286hfp2brpkfir7gjtn6j37k0k2fk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPVXfco20EOromItPzrP6MCnFvA4UVkHQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741351718070-5jv286hfp2brpkfir7gjtn6j37k0k2fk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

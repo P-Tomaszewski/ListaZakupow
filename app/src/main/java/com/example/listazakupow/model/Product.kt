@@ -1,9 +1,12 @@
 package com.example.listazakupow.model
 
+import com.google.firebase.firestore.IgnoreExtraProperties
+
+@IgnoreExtraProperties
 data class Product(
-    val id: Long,
-    val name: String,
-    val price: Double,
-    val amount: Double,
-    val done: Boolean
+    var id: String,
+    var name: String,
+    var price: String,
+    var amount: String,
+    var done: Boolean
 )

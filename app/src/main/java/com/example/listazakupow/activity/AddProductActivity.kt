@@ -4,14 +4,16 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import com.example.listazakupow.R
-import com.example.listazakupow.database.ProductDatabase
-import com.example.listazakupow.database.ProductDto
 import com.example.listazakupow.databinding.ActivityAddProductBinding
+import com.example.listazakupow.model.Product
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.concurrent.Executors
 import kotlin.concurrent.thread
 
@@ -19,9 +21,9 @@ class AddProductActivity : AppCompatActivity() {
     private val pool by lazy {
         Executors.newSingleThreadExecutor()
     }
-    private val db by lazy {
-        Room.databaseBuilder(this, ProductDatabase::class.java, "product").build()
-    }
+
+    val db = Firebase.firestore
+
     private val view by lazy {
         ActivityAddProductBinding.inflate(layoutInflater)
     }
@@ -29,26 +31,30 @@ class AddProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(view.root)
-//        setupShareButton()
 
 
-        val id: Long = (intent.extras?.get("id") ?: -1L) as Long
-        if (id != -1L) {
+        val id: String = (intent.extras?.get("id") ?: "") as String
+        if (!id.equals("")) {
             setupSave(true, id)
             templateWithData(id)
         } else
-            setupSave(false, 0L)
+            setupSave(false, "")
     }
 
-    private fun templateWithData(id: Long) = thread {
-        val transaction = db.products.getProductById(id)
-        findViewById<EditText>(R.id.product_name).setText(transaction.name)
-        findViewById<EditText>(R.id.product_amount).setText(transaction.amount.toString())
-        findViewById<EditText>(R.id.product_price).setText(transaction.price.toString())
-        findViewById<CheckBox>(R.id.product_done_edit)
+    private fun templateWithData(id: String) = thread {
+        val db: FirebaseFirestore
+        db = Firebase.firestore
+
+        db.collection("product").document(id).get()
+            .addOnSuccessListener { document ->
+                findViewById<EditText>(R.id.product_name).setText(document.data?.getValue("name").toString())
+                findViewById<EditText>(R.id.product_amount).setText(document.data?.getValue("amount").toString())
+                findViewById<EditText>(R.id.product_price).setText(document.data?.getValue("price").toString())
+                findViewById<CheckBox>(R.id.product_done_edit).isChecked = document.data?.getValue("done") as Boolean
+            }
     }
 
-    private fun setupSave(edit: Boolean, id: Long) = view.saveButton.setOnClickListener {
+    private fun setupSave(edit: Boolean, id: String) = view.saveButton.setOnClickListener {
         val broadcastIntent = Intent()
         broadcastIntent.component = ComponentName(
             "com.example.receiver3",
@@ -56,52 +62,60 @@ class AddProductActivity : AppCompatActivity() {
         )
 
         if (!edit) { //new
-            var productId = 0L
-            val productDto = ProductDto(
-                0,
+            val productDto = Product(
+                id = "",
                 name = view.productName.text.toString(),
-                amount = toDoubleNum(view.productAmount.text.toString()),
-                price = toDoubleNum(view.productPrice.text.toString()),
+                amount = view.productAmount.text.toString(),
+                price = view.productPrice.text.toString(),
                 done = view.productDoneEdit.isChecked
             )
             pool.submit {
-               productId = db.products.insert(productDto)
+                db.collection("product")
+                    .add(productDto)
+                    .addOnSuccessListener { prodRef ->
+                        Log.d("product", "DocumentSnapshot added with ID: ${prodRef.id}")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("product", "Error adding product", e)
+                    }
                 setResult(Activity.RESULT_OK)
                 finish()
-                broadcastIntent.putExtra(
-                    "productId",
-                    productId
-                )
-                broadcastIntent.putExtra(
-                    "name",
-                    productDto.name
-                )
-                sendBroadcast(broadcastIntent)
+//                broadcastIntent.putExtra(
+//                    "productId",
+//                    productId
+//                )
+//                broadcastIntent.putExtra(
+//                    "name",
+//                    productDto.name
+//                )
+//                sendBroadcast(broadcastIntent)
             }
 
 
         } else { //update
-            val productDto = ProductDto(
+            val productDto = Product(
                 id,
                 name = view.productName.text.toString(),
-                amount = toDoubleNum(view.productAmount.text.toString()),
-                price = toDoubleNum(view.productPrice.text.toString()),
+                amount = view.productAmount.text.toString(),
+                price = view.productPrice.text.toString(),
                 done = view.productDoneEdit.isChecked
             )
             pool.submit {
-                db.products.updateProduct(productDto)
+                db.collection("product")
+                    .document(id).set(productDto)
                 setResult(Activity.RESULT_OK)
                 finish()
             }
         }
-    }
-    private fun toDoubleNum(strNumber: String?): Double {
-        return if (strNumber != null && strNumber.isNotEmpty()) {
-            try {
-                strNumber.toDouble()
-            } catch (e: Exception) {
-                (-1).toDouble()
-            }
-        } else 0.0
-    }
+        }
 }
+
+//    private fun toDoubleNum(strNumber: String?): Double {
+//        return if (strNumber != null && strNumber.isNotEmpty()) {
+//            try {
+//                strNumber.toDouble()
+//            } catch (e: Exception) {
+//                (-1).toDouble()
+//            }
+//        } else 0.0
+//    }

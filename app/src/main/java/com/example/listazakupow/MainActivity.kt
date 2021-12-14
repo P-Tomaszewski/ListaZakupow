@@ -6,37 +6,39 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Size
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.listazakupow.activity.AddProductActivity
 import com.example.listazakupow.activity.OptionsActivity
 import com.example.listazakupow.adapter.ProductAdapter
-import com.example.listazakupow.database.ProductDatabase
 import com.example.listazakupow.databinding.ActivityMainBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
 private const val REQUEST_ADD_PRODUCT = 2
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var db: FirebaseFirestore
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
     private val productAdapter by lazy {
-        ProductAdapter(db, this)
-    }
-
-    private val db by lazy {
-        Room.databaseBuilder(this, ProductDatabase::class.java, "product").build()
+        ProductAdapter(this)
     }
 
     lateinit var sharedPreferences: SharedPreferences
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -48,14 +50,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        var color : Int
-//        color = Color.parseColor(sharedPreferences.getString("color"))
         binding.recyclerView.setBackgroundColor(Color.parseColor(sharedPreferences.getString("color", "White")))
         binding.userName.text = sharedPreferences.getString("userNameList", "User")
     }
 
-        private fun setupProductList() {
-        binding.recyclerView.apply {
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setupProductList() {
+            db = Firebase.firestore
+            binding.recyclerView.apply {
             adapter = productAdapter
             layoutManager = LinearLayoutManager(context)
         }
@@ -76,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    fun setupAddButton2(item: Long) {
+    fun setupAddButton2(item: String) {
         var intent = Intent(this, AddProductActivity::class.java)
         startActivityForResult(intent.putExtra("id", item), REQUEST_ADD_PRODUCT)
     }

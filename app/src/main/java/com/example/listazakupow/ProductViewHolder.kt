@@ -8,8 +8,8 @@ class ProductViewHolder(private val viewBinding: ItemCardProductBinding): Recycl
     fun bind(product: Product){
         with(viewBinding){
             name.text = product.name
-            price.text = product.price.toString()
-            amount.text = product.amount.toString()
+            price.text = product.price
+            amount.text = product.amount
             done.isChecked = product.done
         }
     }
