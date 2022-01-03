@@ -3,12 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout-w1240dp/activity_add_place.xml" value="0.1576305220883534" />
         <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout-w1240dp/item_card_place.xml" value="0.21282401091405184" />
         <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout-w936dp/activity_login.xml" value="0.175" />
+        <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout-w936dp/activity_map.xml" value="0.2471590909090909" />
+        <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/activity_add_place.xml" value="0.33" />
         <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/activity_add_product.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/activity_map.xml" value="0.2635416666666667" />
         <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/activity_options.xml" value="0.25" />
+        <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/activity_place_list.xml" value="0.20657894736842106" />
+        <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/item_card_place.xml" value="0.33" />
         <entry key="..\:/Users/Patryk/AndroidStudioProjects/ListaZakupow/app/src/main/res/layout/item_card_product.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Patryk/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.28940217391304346" />
       </map>

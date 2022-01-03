@@ -1,6 +1,5 @@
 package com.example.listazakupow
 
-import android.app.ActionBar
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -9,15 +8,11 @@ import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Size
-import android.view.ViewGroup
-import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.example.listazakupow.activity.AddProductActivity
 import com.example.listazakupow.activity.OptionsActivity
+import com.example.listazakupow.activity.map.MapActivity
 import com.example.listazakupow.adapter.ProductAdapter
 import com.example.listazakupow.databinding.ActivityMainBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -44,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupProductList()
         setupAddButton()
-        setupSettingsButton()
+        setupMapButton()
         sharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
     }
 
@@ -71,10 +66,10 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun setupSettingsButton() = binding.buttonSettings.setOnClickListener {
-        val intent = Intent(this, OptionsActivity::class.java)
-        startActivity(
-            intent
+    private fun setupMapButton() = binding.buttonMap.setOnClickListener {
+        val intent = Intent(this, MapActivity::class.java)
+        startActivityForResult(
+            intent, REQUEST_ADD_PRODUCT
         )
     }
 
@@ -83,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent.putExtra("id", item), REQUEST_ADD_PRODUCT)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_ADD_PRODUCT && resultCode == Activity.RESULT_OK) {
             productAdapter.load()

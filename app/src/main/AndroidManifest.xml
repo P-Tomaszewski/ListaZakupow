@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.listazakupow">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +10,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ListaZakupow">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB-syhaT0dAy09jeUzjB1QM4eWeNWh8yoc" />
+<!--        <activity-->
+<!--            android:name=".activity.LoginActivity"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.AddProductActivity"
+            android:exported="true">
+        </activity>
+        <activity android:name=".activity.OptionsActivity" />
+        <activity android:name=".activity.map.MapActivity" android:exported="true" />
+        <activity android:name=".activity.map.PlaceListActivity" android:exported="true" />
+        <activity android:name=".activity.map.AddPlaceActivity" android:exported="true" />
+
+        <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,14 +39,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.AddProductActivity"
-            android:exported="true">
-        </activity>
-        <activity android:name=".activity.OptionsActivity" />
-        <activity android:name=".MainActivity"
-            android:exported="true"
-            />
+<!--        <activity android:name=".MainActivity"-->
+<!--            android:exported="true"-->
+<!--            />-->
     </application>
 
 </manifest>

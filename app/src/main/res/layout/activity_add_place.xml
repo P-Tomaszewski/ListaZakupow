@@ -3,20 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.AddProductActivity">
-
-    <CheckBox
-        android:id="@+id/product_done_edit"
-        android:layout_width="96dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:isScrollContainer="false"
-        android:linksClickable="false"
-        android:text="@string/kupione"
-        app:layout_constraintEnd_toEndOf="@+id/product_price"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/product_price" />
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView6"
@@ -24,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Nazwa"
-        app:layout_constraintBaseline_toBaselineOf="@+id/product_name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/place_name"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -32,8 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Ilość"
-        app:layout_constraintBaseline_toBaselineOf="@+id/product_amount"
+        android:text="opis"
+        app:layout_constraintBaseline_toBaselineOf="@+id/place_description"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -41,12 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Cena"
-        app:layout_constraintBaseline_toBaselineOf="@+id/product_price"
+        android:text="Miejsce"
+        app:layout_constraintBaseline_toBaselineOf="@+id/place_place"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/product_price"
+        android:id="@+id/place_place"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -55,11 +42,11 @@
         android:inputType="number|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/product_amount"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/place_description"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/product_name"
+        android:id="@+id/place_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -70,10 +57,11 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/product_amount"
+        android:id="@+id/place_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -83,7 +71,8 @@
         android:inputType="textPersonName|textAutoComplete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/product_name" />
+        app:layout_constraintTop_toBottomOf="@+id/place_name"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/saveButton"
@@ -94,16 +83,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/saveButton"
-        app:layout_constraintEnd_toEndOf="@+id/saveButton"
-        app:srcCompat="@android:drawable/ic_menu_share" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
