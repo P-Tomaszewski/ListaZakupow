@@ -9,8 +9,8 @@ class PlaceViewHolder(private val binding: ItemCardPlaceBinding): RecyclerView.V
     fun bind(place: Place){
         with(binding){
             name.text = place.name
-            decription.text = place.loc
-            loc.text = place.loc
+            decription.text = place.description
+            radius.text = place.radius
         }
     }
 }

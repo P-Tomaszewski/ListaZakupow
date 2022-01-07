@@ -3,6 +3,12 @@
     package="com.example.listazakupow">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ListaZakupow">
+        <receiver
+            android:name=".GeofenceReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB-syhaT0dAy09jeUzjB1QM4eWeNWh8yoc" />

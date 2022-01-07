@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="@+id/image" />
 
         <TextView
-            android:id="@+id/loc"
+            android:id="@+id/radius"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -83,12 +83,12 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lokalizacja"
-            app:layout_constraintBottom_toBottomOf="@+id/loc"
+            android:text="Promien"
+            app:layout_constraintBottom_toBottomOf="@+id/radius"
             app:layout_constraintEnd_toEndOf="@+id/textView12"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toTopOf="@+id/loc" />
+            app:layout_constraintTop_toTopOf="@+id/radius" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

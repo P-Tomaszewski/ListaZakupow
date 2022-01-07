@@ -23,6 +23,8 @@ private const val REQUEST_ADD_PRODUCT = 2
 
 class MainActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
+
+
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }

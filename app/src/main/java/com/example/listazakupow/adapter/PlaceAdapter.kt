@@ -43,7 +43,8 @@ class PlaceAdapter(val mainActivity: PlaceListActivity): RecyclerView.Adapter<Pl
                         place.id,
                         place.data.getValue("name").toString(),
                         place.data.getValue("description").toString(),
-                        place.data.getValue("loc").toString(),
+                        place.data.getValue("latitude").toString(),
+                        place.data.getValue("longitude").toString(),
                         place.data.getValue("radius").toString()
                     )
                     placesTemp.add(productTemp)

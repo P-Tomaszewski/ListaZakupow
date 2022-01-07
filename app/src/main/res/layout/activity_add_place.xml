@@ -28,12 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Miejsce"
-        app:layout_constraintBaseline_toBaselineOf="@+id/place_place"
+        android:text="Promien"
+        app:layout_constraintBaseline_toBaselineOf="@+id/place_radius"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/place_place"
+        android:id="@+id/place_radius"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

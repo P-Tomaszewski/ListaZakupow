@@ -1,6 +1,12 @@
 package com.example.listazakupow.activity.map
 
+import android.Manifest
 import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Criteria
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
@@ -26,9 +32,12 @@ class AddPlaceActivity : AppCompatActivity() {
         ActivityAddPlaceBinding.inflate(layoutInflater)
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(view.root)
+
 
 
         val id: String = (intent.extras?.get("id") ?: "") as String
@@ -47,19 +56,33 @@ class AddPlaceActivity : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 findViewById<EditText>(R.id.place_name).setText(document.data?.getValue("name").toString())
                 findViewById<EditText>(R.id.place_description).setText(document.data?.getValue("description").toString())
-                findViewById<EditText>(R.id.place_place).setText(document.data?.getValue("place").toString())
+                findViewById<EditText>(R.id.place_radius).setText(document.data?.getValue("radius").toString())
             }
     }
 
     private fun setupSave(edit: Boolean, id: String) = view.saveButton.setOnClickListener {
+         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val criteria = Criteria()
+        criteria.isAltitudeRequired = true
+        criteria.accuracy = Criteria.ACCURACY_FINE
+        criteria.powerRequirement = Criteria.NO_REQUIREMENT
+        var provider = locationManager.getProviders(true)
 
+         var location: Location?
+         location = null
+        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            location = locationManager.getLastKnownLocation(provider.get(2))
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+        }
         if (!edit) { //new
             val place = Place(
                 id = "",
                 name = view.placeName.text.toString(),
                 description = view.placeDescription.text.toString(),
-                loc = view.placePlace.text.toString(),
-                radius = "brak"
+                latitude = location?.latitude.toString(),
+                longitude = location?.longitude.toString(),
+                radius = view.placeRadius.text.toString()
             )
             pool.submit {
                 db.collection("place")
@@ -80,8 +103,9 @@ class AddPlaceActivity : AppCompatActivity() {
                 id,
                 name = view.placeName.text.toString(),
                 description = view.placeDescription.text.toString(),
-                loc = view.placePlace.text.toString(),
-                radius = "brak"
+                latitude = location?.latitude.toString(),
+                longitude = location?.longitude.toString(),
+                radius = view.placeRadius.text.toString()
             )
             pool.submit {
                 db.collection("place")
