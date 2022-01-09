@@ -94,7 +94,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                         .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER
                                 or Geofence.GEOFENCE_TRANSITION_EXIT)
                         .build()
-                    geofencingClient?.addGeofences(getGeofancingRequest(geo), getGeofencePendingIntent())
+                    geofencingClient?.addGeofences(getGeofancingRequest(geo), getGeofencePendingIntent(mapAdapter.places[i].name))
                         .addOnSuccessListener {
                             Toast.makeText(
                                 this, "Geofence dodano", Toast.LENGTH_SHORT
@@ -121,11 +121,13 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 .build()
     }
 
-    private fun getGeofencePendingIntent(): PendingIntent {
+    private fun getGeofencePendingIntent(name: String): PendingIntent {
+        val broadcastIntent = Intent(this, GeofenceReceiver::class.java)
+        broadcastIntent.putExtra("name", name)
         return PendingIntent.getBroadcast(
             this,
             0,
-            Intent(this, GeofenceReceiver::class.java),
+            broadcastIntent,
             PendingIntent.FLAG_UPDATE_CURRENT)
 
     }
